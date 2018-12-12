@@ -103,3 +103,69 @@ write finish
 ```
 
 ## 管道流
+
+管道流提供了一个输出流到输入流的机制. 通常我们用于从一个流中获取数据并将数据传递到另一个流中.
+
+![管道流](./img/pipestream.jpg)
+
+如上图, 把文件比作装水的桶, 而水就是文件里的内容. 用一个管子(pipe)链接两个桶使得水从一个桶流入另一个桶. 这样慢慢的实现了大文件的复制过程.
+
+下例中我们读取一个文件内容并将内容写入到另一个文件中.
+
+input.txt
+```
+管道流操作  nodejs pipe stream
+管道流.....
+```
+
+main.js
+```js
+var fs = require('fs')
+
+// create a readable stream
+var readStream = fs.createReadStram('input.txt')
+
+// create a writeable stream
+var writeStream = fs.createWriteStream('output.txt')
+
+// pipe opaction
+// read input.txt content and write into output.txt
+readStream.pipe(writeStream);
+
+console.log('code run end!')
+```
+
+## 链式流
+
+链式流式通过连接输出流到另外一个流并创建多个流操作链的机制. 链式流一般用于管道操作.
+
+接下来就是管道和链式来压缩和解压文件.
+
+创建compress.js文件.
+
+```js
+var fs = require('fs')
+var zlib = require('zlib');
+
+// 压缩input.txt 文件为input.txt.gz
+fs.createStream('input.txt')
+  .pipe(zlib.createGzip)
+  .pipe(fs.createWriteStream('input.txt.gz'))
+
+console.log('zlib end')
+```
+
+创建解压程序 decompress.js
+
+```js
+// decompress.js
+
+var fs = require('fs')
+var zlib = require('zlib')
+
+fs.createReadStream('input.txt.gz')
+  .pipe(zlib.createGunzip())
+  .pipe(fs.createWriteStream('input.gz.txt'))
+
+console.log('decompress end!')
+```
