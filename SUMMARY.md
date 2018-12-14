@@ -4,3 +4,4 @@
 * [Node.js 模块系统](module/module.md)
 * [Node.js 函数](function/function.md)
 * [Node.js 路由](route/route.md)
+* [Node.js 全局对象](global-object/index.md)
