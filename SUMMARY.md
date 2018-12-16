@@ -11,3 +11,4 @@
 * [Node.js 工具模块](./tools/index.md)
 * [Node.js 应用架构](./web/index.md)
 * [Node.js Expres](./express/index.md)
+* [Node.js Mysql](./mysql/mysql.md)
